@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_field %}
+{% block content %}
+    <div class="container">
+        <h1>Create a new Slide.</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button class="btn btn-success ml-2" type="submit">Add Image</button>
+
+        </form>
+     {% if slideimage == 3 %}
+            <a href="{% url 'committee_detail' committee.pk %} ">Finish.</a>
+
+        {% endif %}
+    </div>
+{% endblock %}

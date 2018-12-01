@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="card">
+            <div class="header-row" id="header-row" style="padding: 0px; overflow:hidden; height:260px; width: 100%">
+                <div class="container-fluid" style="padding: 0px;">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="navbar-brand logo">
+                                {% if event.image %}
+                                    <img src="{{ event.image.url }}" alt="company logo" style="width: 100%;">
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h4>{{ event.eventName }}</h4>
+                <a href="{% url 'view_profile' event.author.pk %}"> <span
+                        class="font-weight-bold">{{ event.author }}</span></a> &middot;
+                <span class="text-muted">{{ event.created_on }}</span>
+                <p>{{ event.description |linebreaks }}</p>
+
+
+                <div class="card-footer ">
+                    {#                    <div class="text-right">#}
+                    {#                        {% if post.author == request.user %}#}
+                    {#                            <a href="{% url 'post_edit' post.slug %}">Edit</a> |#}
+                    {#                            <a href="{% url 'post_delete' post.slug %}">Delete</a> |#}
+                    {#                        {% endif %}#}
+                    {#                        <input class=" btn btn-link" type="button" value="Back"#}
+                    {#                               onclick="window.history.go(-1);">#}
+                    {#                    </div>#}
+                    {##}
+                    <div class="comment">
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-link" href="{% url 'create_post' event.pk %}">Add Post </a>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+                <div class="card">
+                    {% for post in post_list %}
+                        <span class="font-weight-bold">{{ post.author }} &middot;</span>
+                        <div class="datetime">{{ post.created_on }}</div>
+                        <p>
+                            {{ post |linebreaks }}
+                        </p>
+                    {% empty %}
+                        <p>No post here yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

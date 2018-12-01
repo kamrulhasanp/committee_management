@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Select {{ committee.leaderNumber }} committee leaders.</h1>
+
+
+        <ul id="messages" class="messages">
+            {% for leader in leader %}
+                <li>{{ leader }}</li>
+            {% endfor %}
+            {% if messages %}
+
+                {% for messages in messages %}
+                    <li style="color: red" {% if messages.tags %}
+                        class="{{ messages.tags }}"{% endif %}>{{ messages }}</li>
+                {% endfor %}
+
+            {% endif %}
+        </ul>
+
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ leader_form.as_p }}
+
+            <button class="btn btn-success ml-2" type="submit">Add leader</button>
+        </form>
+        {% if lenLeader == leaderNumber %}
+            <a href="{% url 'select_member' committee.pk %} ">Select member for this committee.</a>
+
+        {% endif %}
+
+
+    </div>
+
+{% endblock %}

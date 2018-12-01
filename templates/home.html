@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+    <h1>Committee Management System </h1> <br>
+    {% if user.is_authenticated %}
+
+        <h4> Hi {{ user.username }}, Welcome to SWE Community !</h4>
+        <p><a href="{% url 'update_profile' %}">Update Your Profile</a> or <a href="#">Committee</a>
+            or
+            <a href="{% url 'view_profile' user.pk %}">View your profile</a></p>
+        <a class="btn btn-link" href="#">+Create new post </a>
+        <a class="btn btn-link" href="{% url 'new_committee' %}">+Create committee</a>
+        <a class="btn btn-link" href="{% url 'committee_list' %}">All committee</a>
+
+
+    {% endif %}
+    </div>
+{% endblock %}

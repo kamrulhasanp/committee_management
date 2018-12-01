@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        {% for committee in object_list %}
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-header">
+                        <a href="{% url 'committee_detail' committee.pk %}">
+                            <h4>{{ committee.name }}</h4>
+                        </a>
+
+                        <span class="text-muted">{{ committee.created_On }}</span>
+                        <div class="card">
+                            <p>{{ committee.descriptions|linebreaks }}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <br/>
+        {% endfor %}
+
+
+    </div>
+{% endblock %}
